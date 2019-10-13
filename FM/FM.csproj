@@ -78,6 +78,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchFilesWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchFilesWindow.Designer.cs">
+      <DependentUpon>SearchFilesWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowUniqueWords.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SearchFilesWindow.resx">
+      <DependentUpon>SearchFilesWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ShowUniqueWords.resx">
       <DependentUpon>ShowUniqueWords.cs</DependentUpon>
     </EmbeddedResource>

@@ -22,6 +22,7 @@ namespace FM
         public EditorController editorController = new EditorController();
         public string activePath;
         FileInfo activeFile;
+
         public TextEditor(FileInfo fi)
         {
             InitializeComponent();
@@ -76,6 +77,19 @@ namespace FM
 
         }
 
+        private void findAbbreviationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editorController.findAbbreviation(richTextBox, btnRemoveSelection);
+        }
+        private void btnRemoveSelection_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            richTextBox.SelectAll();
+            richTextBox.SelectionBackColor = Color.White;
+            btn.Visible = false;
+            richTextBox.Select(0, 0);
+        }
+
         public class EditorController
         {
             public void saveFile(RichTextBox richTextBox, string activePath)
@@ -85,8 +99,6 @@ namespace FM
                 File.WriteAllText(activePath, richTextBox.Text.Replace("\n", Environment.NewLine));
 
             }
-
-          
 
             public void deleteEmptyTags(RichTextBox richTextBox)
             {
@@ -164,6 +176,69 @@ namespace FM
                 FindByPattern findByPattern = new FindByPattern(richTextBox.Text);
                 findByPattern.ShowDialog();
             }
+
+            public bool IsAbbreviation(string word)
+            {
+                int countUpper = 0;
+                foreach(char ch in word)
+                {
+                    if (ch.ToString().ToUpper().Equals(ch.ToString()))
+                    {
+                        Console.WriteLine(ch + "!!!!!");
+                        countUpper++;
+                    }
+                }
+
+                return countUpper > 1;
+            }
+
+            public void findAbbreviation(RichTextBox richTextBox, Button btnRemoveSelection)
+            {
+                string text = richTextBox.Text;
+                int len = 0;
+                string currWord = "";
+                int countAbbreviation = 0;
+                for (int i = 0; i < text.Length; i++)
+                {
+                    if (char.IsLetter(text[i]))
+                    {
+                        currWord += text[i];
+                        len++;
+                    }
+                    else
+                    {
+                        Console.WriteLine(currWord);
+                        if (IsAbbreviation(currWord))
+                        {
+                            int wBegin = i - len;
+                            richTextBox.Select(wBegin, len);
+                            richTextBox.SelectionBackColor = Color.Red;
+                            countAbbreviation++;
+                        }
+                        len = 0;
+                        currWord = "";
+                    }
+                }
+                if (IsAbbreviation(currWord))
+                {
+                    int wBegin = text.Length - len;
+                    richTextBox.Select(wBegin, len);
+                    richTextBox.SelectionBackColor = Color.Red;
+                    countAbbreviation++;
+                }
+
+
+                if (countAbbreviation > 0)
+                {
+                    richTextBox.Select(0, 0);
+                    btnRemoveSelection.Visible = true;
+                }
+            }
+
+
+
+
+
         }
 
         

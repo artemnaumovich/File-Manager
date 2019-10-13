@@ -195,13 +195,19 @@ namespace FM
             fileController.showHelp();
         }
 
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            fileController.SerchFiles();
+        }
+
+
         public class FileController
         {
             public void OpenFile(string activePath)
             {
                 try
                 {
-                    Console.WriteLine("Need to open file : " + activePath);
                     FileInfo fi = new FileInfo(activePath);
                     TextEditor te = new TextEditor(fi);
                     te.ShowDialog();
@@ -212,13 +218,11 @@ namespace FM
                     errorMessage.ShowDialog();
                 }
                 
-
-                
-                
+ 
             }
+
             public void OpenDirectory(WorkWindow workWindow)
             {
-                Console.WriteLine(workWindow.activePath);
                 string backPath = null;
                 if (!IsDrive(workWindow.activePath))
                     backPath = "...";
@@ -249,7 +253,6 @@ namespace FM
                 }
                 else
                 {
-                    //return activePath + nextPath + "\\";
                     string answerPath = activePath + nextPath + "\\";
                     if (IsFolderAvailable(new DirectoryInfo(answerPath)))
                     {
@@ -291,6 +294,7 @@ namespace FM
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     return false;
                 }
                 return true;
@@ -611,6 +615,12 @@ namespace FM
             {
                 HelpForm helpForm = new HelpForm();
                 helpForm.ShowDialog();
+            }
+
+            public void SerchFiles()
+            {
+                SearchFilesWindow searchFilesWindow = new SearchFilesWindow();
+                searchFilesWindow.ShowDialog();
             }
         }
 

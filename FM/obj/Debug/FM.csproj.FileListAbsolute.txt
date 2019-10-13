@@ -13,5 +13,5 @@ D:\stady\oop\FM\fm\FM\obj\Debug\FM.ShowUniqueWords.resources
 D:\stady\oop\FM\fm\FM\obj\Debug\FM.FindByPattern.resources
 D:\stady\oop\FM\fm\FM\obj\Debug\FM.SystemFileCreator.resources
 D:\stady\oop\FM\fm\FM\obj\Debug\FM.HelpForm.resources
-D:\stady\oop\FM\fm\FM\bin\Debug\FM.exe.CodeAnalysisLog.xml
-D:\stady\oop\FM\fm\FM\bin\Debug\FM.exe.lastcodeanalysissucceeded
+D:\stady\oop\FM\fm\FM\obj\Debug\FM.csprojAssemblyReference.cache
+D:\stady\oop\FM\fm\FM\obj\Debug\FM.SearchFilesWindow.resources

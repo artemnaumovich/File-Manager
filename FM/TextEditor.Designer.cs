@@ -36,6 +36,8 @@
             this.deleteEmptyTagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findUniqueWordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findAbbreviationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRemoveSelection = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +58,7 @@
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1302, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1243, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -65,7 +67,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem
@@ -80,7 +82,8 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteEmptyTagsToolStripMenuItem,
             this.findUniqueWordsToolStripMenuItem,
-            this.findToolStripMenuItem});
+            this.findToolStripMenuItem,
+            this.findAbbreviationToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
@@ -88,7 +91,7 @@
             // deleteEmptyTagsToolStripMenuItem
             // 
             this.deleteEmptyTagsToolStripMenuItem.Name = "deleteEmptyTagsToolStripMenuItem";
-            this.deleteEmptyTagsToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.deleteEmptyTagsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.deleteEmptyTagsToolStripMenuItem.Text = "Delete empty tags";
             this.deleteEmptyTagsToolStripMenuItem.Click += new System.EventHandler(this.DeleteEmptyTagsToolStripMenuItem_Click);
             // 
@@ -106,11 +109,31 @@
             this.findToolStripMenuItem.Text = "Find";
             this.findToolStripMenuItem.Click += new System.EventHandler(this.FindToolStripMenuItem_Click);
             // 
+            // findAbbreviationToolStripMenuItem
+            // 
+            this.findAbbreviationToolStripMenuItem.Name = "findAbbreviationToolStripMenuItem";
+            this.findAbbreviationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.findAbbreviationToolStripMenuItem.Text = "Find abbreviation";
+            this.findAbbreviationToolStripMenuItem.Click += new System.EventHandler(this.findAbbreviationToolStripMenuItem_Click);
+            // 
+            // btnRemoveSelection
+            // 
+            this.btnRemoveSelection.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRemoveSelection.Location = new System.Drawing.Point(13, 555);
+            this.btnRemoveSelection.Name = "btnRemoveSelection";
+            this.btnRemoveSelection.Size = new System.Drawing.Size(197, 38);
+            this.btnRemoveSelection.TabIndex = 2;
+            this.btnRemoveSelection.Text = "Remove selection";
+            this.btnRemoveSelection.UseVisualStyleBackColor = true;
+            this.btnRemoveSelection.Visible = false;
+            this.btnRemoveSelection.Click += new System.EventHandler(this.btnRemoveSelection_Click);
+            // 
             // TextEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1302, 592);
+            this.ClientSize = new System.Drawing.Size(1243, 613);
+            this.Controls.Add(this.btnRemoveSelection);
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -134,5 +157,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteEmptyTagsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findUniqueWordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findAbbreviationToolStripMenuItem;
+        private System.Windows.Forms.Button btnRemoveSelection;
     }
 }

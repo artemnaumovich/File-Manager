@@ -49,6 +49,7 @@
             this.btnNewFile = new System.Windows.Forms.Button();
             this.btnNewDirectory = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -177,7 +178,7 @@
             // btnRename
             // 
             this.btnRename.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnRename.Location = new System.Drawing.Point(166, 715);
+            this.btnRename.Location = new System.Drawing.Point(148, 715);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(118, 46);
             this.btnRename.TabIndex = 10;
@@ -188,7 +189,7 @@
             // btnMove
             // 
             this.btnMove.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnMove.Location = new System.Drawing.Point(314, 715);
+            this.btnMove.Location = new System.Drawing.Point(272, 715);
             this.btnMove.Name = "btnMove";
             this.btnMove.Size = new System.Drawing.Size(118, 46);
             this.btnMove.TabIndex = 12;
@@ -199,7 +200,7 @@
             // btnOpenTextEditor
             // 
             this.btnOpenTextEditor.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnOpenTextEditor.Location = new System.Drawing.Point(515, 715);
+            this.btnOpenTextEditor.Location = new System.Drawing.Point(636, 715);
             this.btnOpenTextEditor.Name = "btnOpenTextEditor";
             this.btnOpenTextEditor.Size = new System.Drawing.Size(152, 46);
             this.btnOpenTextEditor.TabIndex = 13;
@@ -214,14 +215,14 @@
             this.editToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1394, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1394, 30);
             this.menuStrip.TabIndex = 14;
             this.menuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // editToolStripMenuItem
@@ -231,33 +232,33 @@
             this.renameToolStripMenuItem,
             this.moveToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(163, 26);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // renameToolStripMenuItem
             // 
             this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(163, 26);
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.renameToolStripMenuItem.Text = "Rename";
             this.renameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
             // moveToolStripMenuItem
             // 
             this.moveToolStripMenuItem.Name = "moveToolStripMenuItem";
-            this.moveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.moveToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.moveToolStripMenuItem.Text = "Move";
             this.moveToolStripMenuItem.Click += new System.EventHandler(this.MoveToolStripMenuItem_Click);
             // 
             // btnNewFile
             // 
-            this.btnNewFile.Location = new System.Drawing.Point(817, 715);
+            this.btnNewFile.Location = new System.Drawing.Point(918, 715);
             this.btnNewFile.Name = "btnNewFile";
             this.btnNewFile.Size = new System.Drawing.Size(124, 46);
             this.btnNewFile.TabIndex = 15;
@@ -267,7 +268,7 @@
             // 
             // btnNewDirectory
             // 
-            this.btnNewDirectory.Location = new System.Drawing.Point(964, 715);
+            this.btnNewDirectory.Location = new System.Drawing.Point(1048, 715);
             this.btnNewDirectory.Name = "btnNewDirectory";
             this.btnNewDirectory.Size = new System.Drawing.Size(127, 46);
             this.btnNewDirectory.TabIndex = 16;
@@ -277,7 +278,7 @@
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(1201, 715);
+            this.btnHelp.Location = new System.Drawing.Point(1253, 715);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(121, 46);
             this.btnHelp.TabIndex = 17;
@@ -285,11 +286,23 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSearch.Location = new System.Drawing.Point(396, 715);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(118, 46);
+            this.btnSearch.TabIndex = 18;
+            this.btnSearch.Text = "Search (txt files)";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1394, 787);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnNewDirectory);
             this.Controls.Add(this.btnNewFile);
@@ -343,6 +356,7 @@
         private System.Windows.Forms.Button btnNewFile;
         private System.Windows.Forms.Button btnNewDirectory;
         private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
 
