@@ -1,0 +1,17 @@
+D:\stady\oop\FM\FM\FM\obj\Debug\FM.fMain.resources
+D:\stady\oop\FM\FM\FM\obj\Debug\FM.Properties.Resources.resources
+D:\stady\oop\FM\FM\FM\obj\Debug\FM.csproj.GenerateResource.cache
+D:\stady\oop\FM\FM\FM\bin\Debug\FM.exe.config
+D:\stady\oop\FM\FM\FM\bin\Debug\FM.exe
+D:\stady\oop\FM\FM\FM\bin\Debug\FM.pdb
+D:\stady\oop\FM\FM\FM\obj\Debug\FM.exe
+D:\stady\oop\FM\FM\FM\obj\Debug\FM.pdb
+D:\stady\oop\FM\FM\FM\obj\Debug\FM.ErrorMessage.resources
+D:\stady\oop\FM\fm\FM\obj\Debug\FM.InputDataMessage.resources
+D:\stady\oop\FM\FM\FM\obj\Debug\FM.TextEditor.resources
+D:\stady\oop\FM\fm\FM\obj\Debug\FM.ShowUniqueWords.resources
+D:\stady\oop\FM\fm\FM\obj\Debug\FM.FindByPattern.resources
+D:\stady\oop\FM\fm\FM\obj\Debug\FM.SystemFileCreator.resources
+D:\stady\oop\FM\fm\FM\obj\Debug\FM.HelpForm.resources
+D:\stady\oop\FM\fm\FM\bin\Debug\FM.exe.CodeAnalysisLog.xml
+D:\stady\oop\FM\fm\FM\bin\Debug\FM.exe.lastcodeanalysissucceeded
