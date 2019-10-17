@@ -39,7 +39,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRename = new System.Windows.Forms.Button();
             this.btnMove = new System.Windows.Forms.Button();
-            this.btnOpenTextEditor = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,7 +177,7 @@
             // btnRename
             // 
             this.btnRename.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnRename.Location = new System.Drawing.Point(148, 715);
+            this.btnRename.Location = new System.Drawing.Point(171, 715);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(118, 46);
             this.btnRename.TabIndex = 10;
@@ -189,23 +188,13 @@
             // btnMove
             // 
             this.btnMove.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnMove.Location = new System.Drawing.Point(272, 715);
+            this.btnMove.Location = new System.Drawing.Point(319, 715);
             this.btnMove.Name = "btnMove";
             this.btnMove.Size = new System.Drawing.Size(118, 46);
             this.btnMove.TabIndex = 12;
             this.btnMove.Text = "F6 Move";
             this.btnMove.UseVisualStyleBackColor = true;
             this.btnMove.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BtnMove_MouseClick);
-            // 
-            // btnOpenTextEditor
-            // 
-            this.btnOpenTextEditor.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnOpenTextEditor.Location = new System.Drawing.Point(636, 715);
-            this.btnOpenTextEditor.Name = "btnOpenTextEditor";
-            this.btnOpenTextEditor.Size = new System.Drawing.Size(152, 46);
-            this.btnOpenTextEditor.TabIndex = 13;
-            this.btnOpenTextEditor.Text = "F3 Open Text Edirtor";
-            this.btnOpenTextEditor.UseVisualStyleBackColor = true;
             // 
             // menuStrip
             // 
@@ -215,14 +204,14 @@
             this.editToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1394, 30);
+            this.menuStrip.Size = new System.Drawing.Size(1394, 28);
             this.menuStrip.TabIndex = 14;
             this.menuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // editToolStripMenuItem
@@ -232,7 +221,7 @@
             this.renameToolStripMenuItem,
             this.moveToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // deleteToolStripMenuItem
@@ -258,7 +247,7 @@
             // 
             // btnNewFile
             // 
-            this.btnNewFile.Location = new System.Drawing.Point(918, 715);
+            this.btnNewFile.Location = new System.Drawing.Point(898, 715);
             this.btnNewFile.Name = "btnNewFile";
             this.btnNewFile.Size = new System.Drawing.Size(124, 46);
             this.btnNewFile.TabIndex = 15;
@@ -289,9 +278,9 @@
             // btnSearch
             // 
             this.btnSearch.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSearch.Location = new System.Drawing.Point(396, 715);
+            this.btnSearch.Location = new System.Drawing.Point(472, 715);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(118, 46);
+            this.btnSearch.Size = new System.Drawing.Size(127, 46);
             this.btnSearch.TabIndex = 18;
             this.btnSearch.Text = "Search (txt files)";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -306,7 +295,6 @@
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnNewDirectory);
             this.Controls.Add(this.btnNewFile);
-            this.Controls.Add(this.btnOpenTextEditor);
             this.Controls.Add(this.btnMove);
             this.Controls.Add(this.btnRename);
             this.Controls.Add(this.btnDelete);
@@ -346,7 +334,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRename;
         private System.Windows.Forms.Button btnMove;
-        private System.Windows.Forms.Button btnOpenTextEditor;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;

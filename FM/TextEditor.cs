@@ -109,6 +109,7 @@ namespace FM
                     document.Descendants()
                             .Where(e =>     e.IsEmpty || String.IsNullOrWhiteSpace(e.Value))
                             .Remove();
+                    
                     richTextBox.Text = document.ToString();
                 }
                 catch (Exception e)

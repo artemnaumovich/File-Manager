@@ -17,6 +17,7 @@ namespace FM
     {
 
         public FileController fileController = new FileController();
+       
 
         WorkWindow leftWorkWindow;
         WorkWindow rightWorkWindow;
@@ -38,7 +39,12 @@ namespace FM
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
             //hread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
 
+            StreamWriter file = new StreamWriter(@"C:\Users\Acer\Desktop\LogsFM.txt");
+            file.Flush();
+            file.Close();
+
         }
+
 
         private void DirMouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -204,16 +210,41 @@ namespace FM
 
         public class FileController
         {
+            public string pathLogs = @"C:\Users\Acer\Desktop\LogsFM.txt";
+
             public void OpenFile(string activePath)
             {
                 try
                 {
+
                     FileInfo fi = new FileInfo(activePath);
+                    
+                    Director director = new Director();
+                    EventManagerBuilder movingEventManagerBuilder = new MovingEventManagerBuilder();
+                    director.SetEventManagerBuilder(movingEventManagerBuilder);
+                    director.ConstructEventManager("Was opened " + activePath);
+                    EventManager eventManager = director.GetEventManager();
+                    AddEventManager(eventManager.ToString());
+
                     TextEditor te = new TextEditor(fi);
                     te.ShowDialog();
+
+                    movingEventManagerBuilder = new MovingEventManagerBuilder();
+                    director.SetEventManagerBuilder(movingEventManagerBuilder);
+                    director.ConstructEventManager("Was  " + activePath);
+                    eventManager = director.GetEventManager();
+                    AddEventManager(eventManager.ToString());
+
                 }
                 catch(Exception e)
                 {
+                    Director director = new Director();
+                    EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                    director.SetEventManagerBuilder(errorEventManagerBuilder);
+                    director.ConstructEventManager(e.Message);
+                    EventManager eventManager = director.GetEventManager();
+                    AddEventManager(eventManager.ToString());
+
                     ErrorMessage errorMessage = new ErrorMessage(e.Message);
                     errorMessage.ShowDialog();
                 }
@@ -237,7 +268,14 @@ namespace FM
                 workWindow.dirs.Items.AddRange(childrenDirs);
 
                 workWindow.FilterFiles();
-                
+
+                Director director = new Director();
+                EventManagerBuilder movingEventManagerBuilder = new MovingEventManagerBuilder();
+                director.SetEventManagerBuilder(movingEventManagerBuilder);
+                director.ConstructEventManager("Was opened " + workWindow.activePath);
+                EventManager eventManager = director.GetEventManager();
+                AddEventManager(eventManager.ToString());
+
             }
 
             public string NextPath(string activePath, string nextPath)
@@ -260,13 +298,31 @@ namespace FM
                     }
                     else
                     {
+                    
+                        Director director = new Director();
+                        EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                        director.SetEventManagerBuilder(errorEventManagerBuilder);
+                        director.ConstructEventManager("Directory " + answerPath + " is not available");
+                        EventManager eventManager = director.GetEventManager();
+                        AddEventManager(eventManager.ToString());
+                        
                         ErrorMessage errorMessage = new ErrorMessage("This directory is not available");
                         errorMessage.ShowDialog();
                         return activePath;
+                    
                     }
                 }
             }
 
+
+            public void AddEventManager(string eventText)
+            {
+
+                StreamWriter file = new StreamWriter(pathLogs, true, Encoding.UTF8);
+                file.WriteLine(eventText);
+                file.Close();
+                
+            }
             public string PrevPath(string activePath)
             {
                 if (activePath[activePath.Length - 1] == '\\')
@@ -314,6 +370,13 @@ namespace FM
             {
                 if (!IsFolderAvailable(folder))
                 {
+                    Director director = new Director();
+                    EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                    director.SetEventManagerBuilder(errorEventManagerBuilder);
+                    director.ConstructEventManager("Directory " + folder.FullName + " is not available for deleting");
+                    EventManager eventManager = director.GetEventManager();
+                    AddEventManager(eventManager.ToString());
+
                     ErrorMessage errorMessage = new ErrorMessage("This directory is not available");
                     errorMessage.ShowDialog();
                     return;
@@ -363,6 +426,13 @@ namespace FM
                         }
                         catch (Exception e)
                         {
+                            Director director = new Director();
+                            EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                            director.SetEventManagerBuilder(errorEventManagerBuilder);
+                            director.ConstructEventManager(e.Message);
+                            EventManager eventManager = director.GetEventManager();
+                            AddEventManager(eventManager.ToString());
+
                             ErrorMessage errorMessage = new ErrorMessage(e.Message);
                             errorMessage.ShowDialog();
                         }
@@ -376,9 +446,27 @@ namespace FM
 
                     if (dlgRes == DialogResult.Yes)
                     {
-                        DeleteFolder((DirectoryInfo)(selectedFile));
-                        OpenDirectory(leftWorkWindow);
-                        OpenDirectory(rightWorkWindow);
+
+                        if (IsOpenNow(leftWorkWindow, (DirectoryInfo)selectedFile) || IsOpenNow(rightWorkWindow, (DirectoryInfo)selectedFile))
+                        {
+                            Director director = new Director();
+                            EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                            director.SetEventManagerBuilder(errorEventManagerBuilder);
+                            director.ConstructEventManager("This folder or children for it is opened in one of the part in FileManager");
+                            EventManager eventManager = director.GetEventManager();
+                            AddEventManager(eventManager.ToString());
+
+                            ErrorMessage errorMessage = new ErrorMessage("This folder or children for it is opened in one of the part in FileManager");
+                            errorMessage.ShowDialog();
+                        }
+                        else
+                        {
+                            DeleteFolder((DirectoryInfo)(selectedFile));
+                            OpenDirectory(leftWorkWindow);
+                            OpenDirectory(rightWorkWindow);
+                        }
+
+                        
                     }
 
                         
@@ -386,6 +474,14 @@ namespace FM
 
             }
 
+            public bool IsOpenNow(WorkWindow  workWindow, DirectoryInfo directoryInfo)
+            {
+                string activePath = workWindow.activePath;
+                string delDirectoryPath = directoryInfo.FullName;
+
+                return activePath.StartsWith(delDirectoryPath);
+               
+            }
 
             public void RenameSelectedFile(WorkWindow leftWorkWindow, WorkWindow rightWorkWindow)
             {
@@ -409,6 +505,7 @@ namespace FM
 
                     try
                     {
+
                         if (Directory.Exists(selectedFile.FullName))
                         {
                             ((DirectoryInfo)(selectedFile)).MoveTo(Directory.GetParent(selectedFile.FullName) + "\\" + inputData);
@@ -418,9 +515,24 @@ namespace FM
                         {
                             ((FileInfo)(selectedFile)).MoveTo(Directory.GetParent(selectedFile.FullName) + "\\" + inputData);
                         }
+
+                        Director director = new Director();
+                        EventManagerBuilder changeEventManagerBuilder = new ChangeEventManagerBuilder();
+                        director.SetEventManagerBuilder(changeEventManagerBuilder);
+                        director.ConstructEventManager("Was rename " + selectedFile.FullName + " to " + Directory.GetParent(selectedFile.FullName) + "\\" + inputData);
+                        EventManager eventManager = director.GetEventManager();
+                        AddEventManager(eventManager.ToString());
+
                     }
                     catch(Exception e)
                     {
+                        Director director = new Director();
+                        EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                        director.SetEventManagerBuilder(errorEventManagerBuilder);
+                        director.ConstructEventManager(e.Message);
+                        EventManager eventManager = director.GetEventManager();
+                        AddEventManager(eventManager.ToString());
+
                         ErrorMessage errorMessage = new ErrorMessage(e.Message);
                         errorMessage.ShowDialog();
                     }
@@ -460,8 +572,16 @@ namespace FM
                         return;
                     }
 
+
                     if (inputData.StartsWith(selectedFile.FullName))
                     {
+                        Director director = new Director();
+                        EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                        director.SetEventManagerBuilder(errorEventManagerBuilder);
+                        director.ConstructEventManager(selectedFile.FullName + " doesn't move to " + inputData + ". The final folder is the source or child folder for it");
+                        EventManager eventManager = director.GetEventManager();
+                        AddEventManager(eventManager.ToString());
+
                         ErrorMessage errorMessage = new ErrorMessage("The final folder is the source or child folder for it");
                         errorMessage.ShowDialog();
                         return;
@@ -470,18 +590,30 @@ namespace FM
                     {
                         if (Directory.Exists(selectedFile.FullName))
                         {
-                           
                             Directory.Move(selectedFile.FullName, inputData + "\\" + selectedFile.Name);
                         }
                         else
                         if (File.Exists(selectedFile.FullName))
                         {
-                            
                             File.Move(selectedFile.FullName, inputData + "\\" + selectedFile.Name);
                         }
+                        
+                        Director director = new Director();
+                        EventManagerBuilder changeEventManagerBuilder = new ChangeEventManagerBuilder();
+                        director.SetEventManagerBuilder(changeEventManagerBuilder);
+                        director.ConstructEventManager("Was moved " + selectedFile.FullName + " to " + inputData + "\\" + selectedFile.Name);
+                        EventManager eventManager = director.GetEventManager();
+                        AddEventManager(eventManager.ToString());
+
                     }
                     catch (Exception e)
                     {
+                        Director director = new Director();
+                        EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                        director.SetEventManagerBuilder(errorEventManagerBuilder);
+                        director.ConstructEventManager(e.Message);
+                        EventManager eventManager = director.GetEventManager();
+                        AddEventManager(eventManager.ToString());
                         ErrorMessage errorMessage = new ErrorMessage(e.Message);
                         errorMessage.ShowDialog();
                     }
@@ -556,11 +688,27 @@ namespace FM
                     {
                         try
                         {
+                            
                             FileStream fs = File.Create(newFileName);
                             fs.Close();
+
+                            Director director = new Director();
+                            EventManagerBuilder changeEventManagerBuilder = new ChangeEventManagerBuilder();
+                            director.SetEventManagerBuilder(changeEventManagerBuilder);
+                            director.ConstructEventManager("Was created file " + newFileName);
+                            EventManager eventManager = director.GetEventManager();
+                            AddEventManager(eventManager.ToString());
+
                         }
                         catch(Exception e)
                         {
+                            Director director = new Director();
+                            EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                            director.SetEventManagerBuilder(errorEventManagerBuilder);
+                            director.ConstructEventManager(e.Message);
+                            EventManager eventManager = director.GetEventManager();
+                            AddEventManager(eventManager.ToString());
+
                             ErrorMessage errorMessage = new ErrorMessage(e.Message);
                             errorMessage.ShowDialog();
                         }
@@ -594,12 +742,29 @@ namespace FM
                     {
                         try
                         {
+                           
                             DirectoryInfo di = Directory.CreateDirectory(newFileName);
+                            Director director = new Director();
+                            EventManagerBuilder changeEventManagerBuilder = new ChangeEventManagerBuilder();
+                            director.SetEventManagerBuilder(changeEventManagerBuilder);
+                            director.ConstructEventManager("Was created directory " + newFileName);
+                            EventManager eventManager = director.GetEventManager();
+
+                            AddEventManager(eventManager.ToString());
                         }
                         catch (Exception e)
                         {
+                            
+
                             ErrorMessage errorMessage = new ErrorMessage(e.Message);
                             errorMessage.ShowDialog();
+
+                            Director director = new Director();
+                            EventManagerBuilder errorEventManagerBuilder = new ErrorEventManagerBuilder();
+                            director.SetEventManagerBuilder(errorEventManagerBuilder);
+                            director.ConstructEventManager(e.Message);
+                            EventManager eventManager = director.GetEventManager();
+                            AddEventManager(eventManager.ToString());
                         }
                         
                         break;

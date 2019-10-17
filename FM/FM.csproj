@@ -46,12 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Director.cs" />
     <Compile Include="ErrorMessage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ErrorMessage.Designer.cs">
       <DependentUpon>ErrorMessage.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventManager.cs" />
+    <Compile Include="EventManagerBuilder.cs" />
     <Compile Include="FindByPattern.cs">
       <SubType>Form</SubType>
     </Compile>

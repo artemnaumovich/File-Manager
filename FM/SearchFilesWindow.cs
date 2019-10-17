@@ -48,7 +48,7 @@ namespace FM
             {
                 listBox.Items.Clear();
                 Find(listBox, new DirectoryInfo("D:\\"), text);
-                Find(listBox, new DirectoryInfo("C:\\"), text);
+                //Find(listBox, new DirectoryInfo("C:\\"), text);
             }
 
             public void Find(ListBox listBox, DirectoryInfo folder, string text)
